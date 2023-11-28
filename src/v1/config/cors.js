@@ -1,4 +1,4 @@
-const whitelist = ["https://www.mongflow.com/"];
+const whitelist = ["http://localhost:5173", "https://www.mongflow.com/"];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
