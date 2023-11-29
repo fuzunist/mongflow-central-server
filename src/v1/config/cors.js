@@ -11,12 +11,7 @@ const corsOptions = {
   methods: 'GET,PATCH,POST,DELETE,PUT',
   preflightContinue: false,
   optionsSuccessStatus: 204,
-  credentials: true,
-  allowedHeaders: [
-    'Content-Type',
-    'Authorization',
-    'X-Requested-With'
-  ]
+
 };
 
 module.exports = corsOptions;
