@@ -5,7 +5,7 @@ const {
   passwordHashCompare,
 } = require("../utils/helpers");
 const { loginUser, getFullUser } = require("../services/User");
-const connectFirmDB  = require("../model/firmDB");
+const connectFirmDB = require("../model/firmDB");
 
 const login = async (req, res) => {
   try {
@@ -26,7 +26,6 @@ const login = async (req, res) => {
       Password,
       rows[0].passwordhash
     );
-    console.log("user: ", rows[0]);
     if (hashedPassword) {
       const user = { ...rows[0] };
       delete user.passwordhash;
@@ -45,9 +44,18 @@ const login = async (req, res) => {
         access_token: generateAccessToken(fullUserData),
         refresh_token: generateRefreshToken(fullUserData),
       };
-      fullUserData.itin=String(user.itin)
-      
-      console.log("**: ", fullUserData, "fullUserData");
+      fullUserData.itin = String(user.itin);
+
+      const cookieOptions={
+        path: "/",
+        domain: ".mongflow.com",
+        secure: true,
+        httpOnly: true,
+        sameSite: "none",
+      }
+      res.cookie('access_token',fullUserData, {maxAge:   1000 * 60 * 60 * 24 * 7, ...cookieOptions});
+      res.cookie('refresh_token',fullUserData, {maxAge:  1000 * 60 * 60 * 24 * 30, ...cookieOptions});
+
       return res.status(httpStatus.OK).send(fullUserData);
     } else {
       return res

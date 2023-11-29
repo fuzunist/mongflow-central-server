@@ -2,13 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const cookieParser= require("cookie-parser");
 const cors = require("cors");
 const corsOptions = require("./config/cors");
 const { connectDB, connectMGDB } = require("./model/db");
 const userRouter = require("./routes/userRouter");
+
 const app = express();
 
 app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
