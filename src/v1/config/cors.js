@@ -10,7 +10,8 @@ const corsOptions = {
   origin: '*',
   methods: 'GET,PATCH,POST,DELETE,PUT',
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  credentials: true,
 };
 
 module.exports = corsOptions;
