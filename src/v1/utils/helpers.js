@@ -26,8 +26,16 @@ const generateRefreshToken = (user) => {
   );
 };
 
+
+
+const passwordToHash = async (password) => {
+    return await bcrypt.hash(password, 10)
+}
 module.exports = {
   passwordHashCompare,
   generateAccessToken,
   generateRefreshToken,
+  passwordToHash
 };
+
+

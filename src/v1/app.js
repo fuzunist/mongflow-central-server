@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
-const cookieParser= require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const corsOptions = require("./config/cors");
 const { connectDB, connectMGDB } = require("./model/db");
@@ -17,6 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json({ limit: "2mb" }));
 app.use(helmet());
+app.use((req, res, next) => {
+  res.setHeader("Referrer-Policy", "no-referrer");
+  next();
+});
 
 const PORT = process.env.APP_PORT || 4500;
 app.set("port", PORT);
