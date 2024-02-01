@@ -29,7 +29,7 @@ const connectMGDB= async () => {
     },
   });
 
-  console.log("MGDB Connection is successful...");
+  console.log("CAS DB Connection is successful...");
 
   process.mgpool = pool;
 };
